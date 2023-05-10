@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registro</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+	<script>
+		function validarRegistro() {
+			// Obtener los valores de los campos
+			var nombre = document.getElementById("nombre").value;
+			var apellido = document.getElementById("apellido").value;
+			var direccion = document.getElementById("direccion").value;
+			var usuario = document.getElementById("usuario").value;
+			var contrasena = document.getElementById("contrasena").value;
+			var confirmarContrasena = document.getElementById("confirmarContrasena").value;
+			var email = document.getElementById("email").value;
+
+			// Validar el campo nombre y apellido
+			if (nombre == "" || apellido == "" || nombre.length > 25 || apellido.length > 25) {
+				alert("Por favor ingrese su nombre y apellido con una longitud máxima de 25 caracteres.");
+				return false;
+			}
+
+			// Validar el campo dirección
+			if (!direccion.startsWith("cll") && !direccion.startsWith("cra") && !direccion.startsWith("av") && !direccion.startsWith("anv") && !direccion.startsWith("trans")) {
+				alert("Por favor ingrese una dirección válida que comience con cll, cra, av, anv o trans.");
+				return false;
+			}
+
+			// Validar el campo nombre de usuario
+			if (usuario == "" || usuario.length < 10 || usuario.length > 20) {
+				alert("Por favor ingrese un nombre de usuario con una longitud mínima de 10 caracteres y máxima de 20 caracteres.");
+				return false;
+			}
+
+			// Validar el campo contraseña
+			var regexContrasena = /^(?=.*[A-Z])(?=.*\d)(?=.*[a-z])[A-Za-z\d]{15,20}$/;
+			if (contrasena == "" || !regexContrasena.test(contrasena)) {
+				alert("Por favor ingrese una contraseña con una longitud mínima de 15 caracteres, máxima de 20 caracteres, que contenga al menos una mayúscula, una minúscula y un número.");
+				return false;
+			}
+
+			// Validar el campo confirmar contraseña
+			if (confirmarContrasena == "" || confirmarContrasena != contrasena) {
+				alert("Las contraseñas no coinciden, por favor verifique e intente de nuevo.");
+				return false;
+			}
+
+			// Validar el campo email
+			if (email == "" || email.length > 120) {
+				alert("Por favor ingrese un correo electrónico con una longitud máxima de 120 caracteres.");
+				return false;
+			}
+
+			// Si se llega hasta aquí, significa que todo está validado y se puede enviar el formulario
+			alert("Registro exitoso!");
+			return true;
+		}
+	</script>
+</head>
+<body>
+	<h1>Registro de usuario</h1>
+	<form onsubmit="return validarRegistro()">
+        <label for="userid">ID de Usuario:</label>
+		<input type="text" id="userid" name="userid">
+
+        <label for="country">País:</label>
+				<select id="country" name="country">
+					<option value="">Seleccione un país</option>
+					<option value="Argentina">Argentina</option>
+					<option value="Bolivia">Bolivia</option>
+					<option value="Brasil">Brasil</option>
+					<option value="Chile">Chile</option>
+					<option value="Colombia">Colombia</option>
+					<option value="Costa Rica">Costa Rica</option>
+					<option value="Cuba">Cuba</option>
+					<option value="Ecuador">Ecuador</option>
+					<option value="El Salvador">El Salvador</option>
+					<option value="Guatemala">Guatemala</option>
+					<option value="Haití">Haití</option>
+					<option value="Honduras">Honduras</option>
+					<option value="Jamaica">Jamaica</option>
+					<option value="México">México</option>
+					<option value="Nicaragua">Nicaragua</option>
+					<option value="Panamá">Panamá</option>
+					<option value="Paraguay">Paraguay</option>
+					<option value="Perú">Perú</option>
+					<option value="Puerto Rico">Puerto Rico</option>
+					<option value="República Dominicana">República Dominicana</option>
+					<option value="Uruguay">Uruguay</option>
+					<option value="Venezuela">Venezuela</option>
+				</select>
+
+
+		<label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="apellido" ><br>
+		<label for="apellido">Apellido:</label>
+		<input type="text" id="apellido" name="apellido" ><br>
+
+		<label for="direccion">Dirección:</label>
+		<input type="text" id="direccion" name="direccion" ><br>
+
+		<label for="usuario">Nombre de usuario:</label>
+		<input type="text" id="usuario" name="usuario" ><br>
+
+		<label for="contrasena">Contraseña:</label>
+		<input type="password" id="contrasena" name="contrasena" ><br>
+
+		<label for="confirmarContrasena">Confirmar contraseña: </label>
+        <input type="password" id="confirmarContrasena" name="confirmarContrasena"><br>
+
+        <label for="email">Email: </label>
+        <input type="email" id="email" name="email"><br>
+
+        <input type="radio" name="opcion" value="gustos" id="gustos"> Gustos de carro<br><br>
+        <div id="registro-gustos" style="display: none;">
+
+            <label for="color-favorito">Color favorito:</label>
+			<input type="text" id="color-favorito" name="color-favorito" maxlength="25" required><br><br>
+
+			<label for="marca-favorita">Marca favorita:</label>
+			<input type="text" id="marca-favorita" name="marca-favorita" maxlength="25" required><br><br>
+
+			<label for="estilo-favorito">Estilo favorito:</label>
+			<input type="text" id="estilo-favorito" name="estilo-favorito" maxlength="25" required><br><br>
+
+			<label for="modelo-favorito">Modelo favorito:</label>
+			<input type="text" id="modelo-favorito" name="modelo-favorito" maxlength="25" required><br><br>
+
+
+            <label for="price-range">Valor máximo y mínimo que estaría dispuesto a gastar en un vehículo:</label>
+            <input type="range" id="price-range" name="price-range" min="0" max="100000" step="500" value="50000">
+
+        <input type="submit" value="Registrarse">
+
+       
+    </form>
+
+    
+</div>
+
+	<script>
+		document.getElementById('gustos').addEventListener('click', function() {
+			document.getElementById('registro-gustos').style.display = 'block';
+		});
+	</script>
+
+</body>
+</html>
